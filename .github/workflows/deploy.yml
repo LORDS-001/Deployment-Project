@@ -12,6 +12,9 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
       
+      - name: Make Test Script Executable
+        run: chmod +x test.sh
+        
       - name: Run Basic Test Script
         run: ./test.sh 
 
