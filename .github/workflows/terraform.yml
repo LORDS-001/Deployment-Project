@@ -1,0 +1,42 @@
+name: 'Terraform IaC'
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'terraform/**'
+
+jobs:
+  terraform:
+    name: 'Terraform Plan & Apply'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./terraform 
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials for Terraform
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_TF_ACCESS_KEY_ID }} 
+          aws-secret-access-key: ${{ secrets.AWS_TF_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3 
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color 
+      
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply -auto-approve
