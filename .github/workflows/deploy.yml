@@ -8,6 +8,11 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    
+    env:
+      S3_BUCKET: my-terraform-state-backend-unique-name-123
+      AWS_REGION: eu-north-1
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
