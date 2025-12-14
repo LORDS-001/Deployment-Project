@@ -22,3 +22,12 @@ jobs:
           sleep 5 
           # Check if the website endpoint returns HTTP 200 (Success)
           curl -sI http://localhost:8080 | grep "HTTP/1.1 200 OK"
+
+      - name: Deploy static site to S3 (CD Step)
+        run: |
+          aws s3 sync ./ s3://${{ env.S3_BUCKET }} --delete --acl public-read \
+            --exclude ".git/*" \
+            --exclude ".github/*" \
+            --exclude "terraform/*" \
+            --exclude "test.sh" \
+            --exclude "Dockerfile"
