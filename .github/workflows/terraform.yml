@@ -11,6 +11,10 @@ jobs:
   terraform:
     name: 'Terraform Plan & Apply'
     runs-on: ubuntu-latest
+
+    env:
+        AWS_REGION: eu-north-1
+
     defaults:
       run:
         working-directory: ./terraform 
@@ -24,7 +28,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_TF_ACCESS_KEY_ID }} 
           aws-secret-access-key: ${{ secrets.AWS_TF_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3 

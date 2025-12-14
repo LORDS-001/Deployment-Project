@@ -17,6 +17,13 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Configure AWS Credentials for Deployment
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_APP_ACCESS_KEY_ID }} 
+          aws-secret-access-key: ${{ secrets.AWS_APP_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
       - name: Build Docker Image
         run: docker build -t my-website-image . 
 
