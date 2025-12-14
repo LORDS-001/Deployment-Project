@@ -37,6 +37,9 @@ jobs:
 
       - name: Deploy static site to S3 (CD Step)
         run: |
-          aws s3 sync ./ s3://${{ env.S3_BUCKET }} --delete --acl public-read \
-          --exclude ".git/*" --exclude ".github/*" --exclude "terraform/*" \
-          --exclude "test.sh" --exclude "Dockerfile" --exclude "terraform.tfstate"
+          # The command uses --exclude "*" to ignore everything first, 
+          # then uses --include to only allow the files needed for the website.
+          aws s3 sync . s3://${{ env.S3_BUCKET }} --delete --acl public-read \
+            --exclude "*" \
+            --include "index.html" \
+            --include "style.css"
