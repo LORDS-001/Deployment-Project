@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     
     env:
-      S3_BUCKET: my-terraform-state-backend-unique-name-123
+      S3_BUCKET: my-first-devops-ci-cd-site-lords
       AWS_REGION: eu-north-1
 
     steps:
