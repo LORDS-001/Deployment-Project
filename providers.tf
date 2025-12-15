@@ -14,7 +14,11 @@ terraform {
     }
 }
 
+provider "aws" {
+  region = var.aws_region
+}
 
 provider "aws" {
-    region = "eu-north-1"
+  alias  = "acm_provider"
+  region = "us-east-1"  # Certificate must be in this region
 }
