@@ -15,3 +15,9 @@ variable "domain_name" {
   type        = string
   default     = "lords.com"
 }
+
+variable "s3_website_bucket_name" {
+  description = "The name of the S3 bucket hosting the website."
+  type        = string
+  default     = "my-first-devops-ci-cd-site-lords"
+}
