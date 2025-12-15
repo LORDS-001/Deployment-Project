@@ -46,6 +46,7 @@ resource "aws_acm_certificate_validation" "cert_validation" {
 data "aws_s3_bucket" "website_bucket" {
   bucket = var.s3_website_bucket_name
 }
+
 resource "aws_cloudfront_origin_access_control" "website_oac" {
   name                              = "${var.s3_website_bucket_name}-oac"
   description                       = "OAC for S3 Website Origin"
@@ -137,5 +138,34 @@ resource "aws_cloudfront_distribution" "website_cdn" {
     ssl_support_method             = "sni-only"
     minimum_protocol_version       = "TLSv1.2_2021"
     
+  }
+}
+
+data "aws_route53_zone" "primary" {
+  name         = "yourwebsite.com."
+  private_zone = false
+}
+
+resource "aws_route53_record" "root_record" {
+  zone_id = data.aws_route53_zone.primary.zone_id
+  name    = var.domain_name  
+  type    = "A"
+
+  alias {
+    name                   = aws_cloudfront_distribution.website_cdn.domain_name
+    zone_id                = aws_cloudfront_distribution.website_cdn.hosted_zone_id
+    evaluate_target_health = true
+  }
+}
+
+resource "aws_route53_record" "www_record" {
+  zone_id = data.aws_route53_zone.primary.zone_id
+  name    = "www.${var.domain_name}" 
+  type    = "A"
+
+  alias {
+    name                   = aws_cloudfront_distribution.website_cdn.domain_name
+    zone_id                = aws_cloudfront_distribution.website_cdn.hosted_zone_id
+    evaluate_target_health = true
   }
 }
