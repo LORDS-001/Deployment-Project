@@ -26,7 +26,7 @@ resource "aws_route53_record" "cert_validation" {
       name    = dvo.resource_record_name
       record  = dvo.resource_record_value
       type    = dvo.resource_record_type
-      zone_id = data.aws_route53_zone.primary.zone_id
+      zone_id = aws_route53_zone.primary.zone_id
     }
   }
 
@@ -147,7 +147,7 @@ resource "aws_cloudfront_distribution" "website_cdn" {
 }
 
 resource "aws_route53_record" "root_record" {
-  zone_id = data.aws_route53_zone.primary.zone_id
+  zone_id = aws_route53_zone.primary.zone_id
   name    = var.domain_name  
   type    = "A"
 
@@ -159,7 +159,7 @@ resource "aws_route53_record" "root_record" {
 }
 
 resource "aws_route53_record" "www_record" {
-  zone_id = data.aws_route53_zone.primary.zone_id
+  zone_id = aws_route53_zone.primary.zone_id
   name    = "www.${var.domain_name}" 
   type    = "A"
 
