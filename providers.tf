@@ -20,5 +20,5 @@ provider "aws" {
 
 provider "aws" {
   alias  = "acm_provider"
-  region = "us-east-1"  # Certificate must be in this region
+  region = "us-east-1" 
 }
