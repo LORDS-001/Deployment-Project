@@ -55,6 +55,9 @@ resource "aws_cloudfront_origin_access_control" "website_oac" {
   signing_protocol                  = "sigv4"
 }
 resource "aws_s3_bucket_policy" "website_policy" {
+  depends_on = [
+    aws_cloudfront_distribution.website_cdn
+  ]
   bucket = data.aws_s3_bucket.website_bucket.id
   policy = data.aws_iam_policy_document.s3_oac_policy.json
 }
@@ -142,7 +145,7 @@ resource "aws_cloudfront_distribution" "website_cdn" {
 }
 
 data "aws_route53_zone" "primary" {
-  name         = "yourwebsite.com."
+  name         = "lords.com."
   private_zone = false
 }
 
