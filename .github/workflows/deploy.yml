@@ -1,4 +1,4 @@
-name: Deploy Static Website to S3
+name: "DevOps Website Deploy"
 
 on:
   push:
@@ -6,40 +6,30 @@ on:
       - main
 
 jobs:
-  test:
+  terraform-and-deploy:
     runs-on: ubuntu-latest
-    
-    env:
-      S3_BUCKET: my-first-devops-ci-cd-site-lords
-      AWS_REGION: eu-north-1
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Configure AWS Credentials for Deployment
+      - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }} 
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
+          aws-region: eu-north-1 
 
-      - name: Build Docker Image
-        run: docker build -t my-website-image . 
+      - name: Terraform Init
+        run: terraform init
 
-      - name: Run Container and Verify Port
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+
+      - name: Deploy to S3
         run: |
-          docker run -d -p 8080:80 --name test-container my-website-image
-          # Wait a moment for Nginx to start
-          sleep 5 
-          # Check if the website endpoint returns HTTP 200 (Success)
-          curl -sI http://localhost:8080 | grep "HTTP/1.1 200 OK"
+          aws s3 sync ./src s3://my-tf-devops-ci-cd-site-unique-name-12345 --delete
 
-      - name: Deploy static site to S3 (CD Step)
+      - name: CloudFront Invalidation
         run: |
-          # The command uses --exclude "*" to ignore everything first, 
-          # then uses --include to only allow the files needed for the website.
-          aws s3 sync . s3://${{ env.S3_BUCKET }} --delete --acl public-read \
-            --exclude "*" \
-            --include "index.html" \
-            --include "style.css"
+          DIST_ID=$(terraform output -raw cloudfront_distribution_id)
+          aws cloudfront create-invalidation --distribution-id $DIST_ID --paths "/*"

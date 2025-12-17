@@ -70,13 +70,6 @@ resource "aws_cloudfront_origin_access_control" "website_oac" {
   signing_behavior                  = "always"
   signing_protocol                  = "sigv4"
 }
-resource "aws_s3_bucket_policy" "website_policy" {
-  depends_on = [
-    aws_cloudfront_distribution.website_cdn
-  ]
-  bucket = aws_s3_bucket.website_bucket.id
-  policy = data.aws_iam_policy_document.s3_oac_policy.json
-}
 
 data "aws_iam_policy_document" "s3_oac_policy" {
   statement {
@@ -100,6 +93,33 @@ data "aws_iam_policy_document" "s3_oac_policy" {
     }
   }
 }
+
+resource "aws_s3_bucket_policy" "website_policy" {
+  depends_on = [
+    aws_cloudfront_distribution.website_cdn
+  ]
+  bucket = aws_s3_bucket.website_bucket.id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid       = "AllowCloudFrontServicePrincipalReadOnly"
+        Effect    = "Allow"
+        Principal = {
+          Service = "cloudfront.amazonaws.com"
+        }
+        Action   = "s3:GetObject"
+        Resource = "${aws_s3_bucket.website_bucket.arn}/*"
+        Condition = {
+          StringEquals = {
+            "AWS:SourceArn" = aws_cloudfront_distribution.website_cdn.arn
+          }
+        }
+      }
+    ]
+  })
+}
+
 
 resource "aws_cloudfront_distribution" "website_cdn" {
 
@@ -193,6 +213,12 @@ resource "aws_route53_record" "www_record" {
 }
 */
 
-output "cloudfront_url" {
-  value = aws_cloudfront_distribution.website_cdn.domain_name
+output "website_url" {
+  description = "The URL of the website"
+  value       = "https://${aws_cloudfront_distribution.website_cdn.domain_name}"
+}
+
+output "cloudfront_distribution_id" {
+  description = "The ID of the CloudFront distribution"
+  value       = aws_cloudfront_distribution.website_cdn.id
 }
