@@ -1,3 +1,7 @@
+data "aws_cloudfront_cache_policy" "optimized" {
+  name = "Managed-CachingOptimized"
+}
+
 /* 
 resource "aws_acm_certificate" "website_cert" {
   domain_name       = "lords.com"        
@@ -53,9 +57,11 @@ resource "aws_acm_certificate_validation" "cert_validation" {
 }
 */
 
+/*
 data "aws_s3_bucket" "website_bucket" {
   bucket = var.s3_website_bucket_name
 }
+*/
 
 resource "aws_cloudfront_origin_access_control" "website_oac" {
   name                              = "${var.s3_website_bucket_name}-oac"
@@ -68,7 +74,7 @@ resource "aws_s3_bucket_policy" "website_policy" {
   depends_on = [
     aws_cloudfront_distribution.website_cdn
   ]
-  bucket = data.aws_s3_bucket.website_bucket.id
+  bucket = aws_s3_bucket.website_bucket.id
   policy = data.aws_iam_policy_document.s3_oac_policy.json
 }
 
@@ -84,7 +90,7 @@ data "aws_iam_policy_document" "s3_oac_policy" {
     ]
 
     resources = [
-      "${data.aws_s3_bucket.website_bucket.arn}/*",
+      "${aws_s3_bucket.website_bucket.arn}/*",
     ]
 
     condition {
@@ -104,8 +110,8 @@ resource "aws_cloudfront_distribution" "website_cdn" {
   comment         = "CDN for ${var.domain_name}"
 
   origin {
-    domain_name = data.aws_s3_bucket.website_bucket.bucket_regional_domain_name
-    origin_id   = data.aws_s3_bucket.website_bucket.id
+    domain_name = aws_s3_bucket.website_bucket.bucket_regional_domain_name
+    origin_id   = "S3-Website-Origin"
 
     /*
     s3_origin_config {
@@ -117,14 +123,14 @@ resource "aws_cloudfront_distribution" "website_cdn" {
   }
 
   default_cache_behavior {
-    target_origin_id       = data.aws_s3_bucket.website_bucket.id
+    target_origin_id       = "S3-Website-Origin"
     viewer_protocol_policy = "redirect-to-https"
 
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
     compress         = true
 
-    cache_policy_id = "658327ea-f89d-4804-be3d-aa771c2fe45d"
+    cache_policy_id = data.aws_cloudfront_cache_policy.optimized.id
   }
 
   restrictions {
@@ -145,8 +151,6 @@ resource "aws_cloudfront_distribution" "website_cdn" {
     response_page_path = "/index.html"
   }
 
-  aliases = [var.domain_name, "www.${var.domain_name}"]
-  
   viewer_certificate {
     cloudfront_default_certificate = true
   }
