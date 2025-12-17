@@ -1,3 +1,4 @@
+/* 
 resource "aws_acm_certificate" "website_cert" {
   domain_name       = "lords.com"        
   validation_method = "DNS"
@@ -12,7 +13,9 @@ resource "aws_acm_certificate" "website_cert" {
     create_before_destroy = true
   }
 }
+*/
 
+/*
 resource "aws_route53_zone" "primary" {
   name = "lords.com"
 
@@ -20,6 +23,8 @@ resource "aws_route53_zone" "primary" {
     Name = "lords.com Website"
   }
 }
+*/
+/*
 resource "aws_route53_record" "cert_validation" {
   for_each = {
     for dvo in aws_acm_certificate.website_cert.domain_validation_options : dvo.domain_name => {
@@ -37,13 +42,16 @@ resource "aws_route53_record" "cert_validation" {
   zone_id         = each.value.zone_id
   records         = [each.value.record]
 }
+*/
 
+/*
 resource "aws_acm_certificate_validation" "cert_validation" {
   certificate_arn         = aws_acm_certificate.website_cert.arn
   validation_record_fqdns = [for record in aws_route53_record.cert_validation : record.fqdn]
 
   provider = aws.acm_provider
 }
+*/
 
 data "aws_s3_bucket" "website_bucket" {
   bucket = var.s3_website_bucket_name
@@ -89,7 +97,7 @@ data "aws_iam_policy_document" "s3_oac_policy" {
 
 resource "aws_cloudfront_distribution" "website_cdn" {
 
-  provider = aws.acm_provider
+  # provider = aws.acm_provider
 
   enabled         = true
   is_ipv6_enabled = true
@@ -99,9 +107,11 @@ resource "aws_cloudfront_distribution" "website_cdn" {
     domain_name = data.aws_s3_bucket.website_bucket.bucket_regional_domain_name
     origin_id   = data.aws_s3_bucket.website_bucket.id
 
+    /*
     s3_origin_config {
       origin_access_identity = "" 
     }
+    */
 
     origin_access_control_id = aws_cloudfront_origin_access_control.website_oac.id
   }
@@ -138,14 +148,20 @@ resource "aws_cloudfront_distribution" "website_cdn" {
   aliases = [var.domain_name, "www.${var.domain_name}"]
   
   viewer_certificate {
+    cloudfront_default_certificate = true
+  }
+
+  /*
+  viewer_certificate {
     cloudfront_default_certificate = false
     acm_certificate_arn            = aws_acm_certificate_validation.cert_validation.certificate_arn
     ssl_support_method             = "sni-only"
     minimum_protocol_version       = "TLSv1.2_2021"
-    
   }
+  */
 }
 
+/*
 resource "aws_route53_record" "root_record" {
   zone_id = aws_route53_zone.primary.zone_id
   name    = var.domain_name  
@@ -157,7 +173,9 @@ resource "aws_route53_record" "root_record" {
     evaluate_target_health = true
   }
 }
+*/
 
+/*
 resource "aws_route53_record" "www_record" {
   zone_id = aws_route53_zone.primary.zone_id
   name    = "www.${var.domain_name}" 
@@ -168,4 +186,9 @@ resource "aws_route53_record" "www_record" {
     zone_id                = aws_cloudfront_distribution.website_cdn.hosted_zone_id
     evaluate_target_health = true
   }
+}
+*/
+
+output "cloudfront_url" {
+  value = aws_cloudfront_distribution.website_cdn.domain_name
 }
