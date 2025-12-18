@@ -1,1 +1,407 @@
+body {
+    background-color: black;
+    color: white;
+    font-size: 18px;
+}
+
+
+.hero {
+    background-image: url('images/Hero\ Background\ Design.png');
+}
+
+.navbar {
+    padding: 10px;
+    display: flex;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 40px;
+    align-items: center;
+    font-family: Anton;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    flex: 1;
+    font-family: bungee;
+    align-items: center;
+    display: flex;
+}
+
+.mainnav {
+    flex-flow: horizontal;
+    width: 380px;
+    height: 60px;
+    align-items: center;
+    color: #4AF071;
+    display: flex;
+    margin-left: 150px;
+    margin-right: 150px;
+    font-size: 20px;
+}
+.mainnav a {
+    text-decoration: underline;
+    text-underline-offset: 8px;
+    color: #4AF071;
+    padding: 14px 16px;
+    font-size: 16px;
+}
+.mainnav a:hover {
+    color: #ffd645;
+    transition: 0.3s;
+    border-radius: 12px;
+}
+
+#contact-btn {
+    border-radius: 24px;
+    border: 2px solid #4AF071;
+    box-shadow: #4AF071 0px 0px 10px;
+    background-color: black;
+    color: white;
+    padding-top: 15.5px 32px;
+    padding-bottom: 15.5px 32px;
+    flex: 0 0 173px;
+    width: 173px;
+    height: 49px;
+    font-size: 1;
+    font-family: anton;
+    cursor: pointer;
+    align-items: center;
+}
+#contact-btn:hover {
+    background-color: #4AF071;
+    color: black;
+    height: 40px;
+    transition: 0.3s;
+}
+
+
+.hero-content {
+    padding-top: 90px;
+    padding-bottom: 70px;
+    text-align: center;
+}
+
+#star1 {
+    text-align: center;
+    color: #4AF071;
+    width: 36px;
+    height: 33px;
+}
+#star2 {
+    text-align: center;
+    color: #ffd645;
+    width: 36px;
+    height: 33px;
+}
+#star3 {
+    text-align: center;
+    color: #4AF071;
+    width: 36px;
+    height: 33px;
+}
+#star4 {
+    text-align: center;
+    color: #ffd645;
+    width: 36px;
+    height: 33px;
+}
+#star5 {
+    text-align: center;
+    color: #4AF071;
+    width: 36px;
+    height: 33px;
+}
+
+#hero-main {
+    text-align: center;
+    font-size: 72px;
+    color: #ffd645;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-shadow: -5px 5px 8px #ffc800;
+    letter-spacing: 5px;
+    border-bottom: 2px solid #000000;
+}
+
+#project-link {
+    color: #4AF071;
+    text-decoration: none;
+}
+
+#hero-info {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 50px;
+}
+
+.hero-btn {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 465px;
+    margin-right: 465px;
+    align-items: center;
+    align-content: center;
+}
+#hero-btn {
+    border-radius: 24px;
+    border: 2px solid #4AF071;
+    box-shadow: #4AF071 0px 0px 10px;
+    background-color: black;
+    color: white;
+    padding-top: 15.5px 32px;
+    padding-bottom: 15.5px 32px;
+    flex: 0 0 173px;
+    width: 173px;
+    height: 49px;
+    font-size: 1;
+    font-family: anton;
+    cursor: pointer;
+    align-items: center;
+}
+#hero-btn:hover {
+    background-color: #4AF071;
+    color: black;
+    height: 40px;
+    transition: 0.3s;
+}
+
+
+#mango-profile {
+    width: 100%;
+}
+
+
+.content {
+    margin-left: 100px;
+    margin-right: 100px;
+    background-image: url('images/Hero\ Background\ Design.png');
+}
+
+.about-section {
+    padding-top: 100px;
+    padding-bottom: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.about1 {
+    height: auto;
+    width: 50%;
+}
+
+#about-header {
+    font-size: 64px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin: auto;
+}
+
+#about-sub-header {
+    margin-top: 30px;
+    font-size: 16px;
+}
+
+#about-info {
+    margin-bottom: 30px;
+    font-size: 18px;
+     line-height: 28px;
+    align-self: right;
+}
+
+.impact-section {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+}
+
+.title {
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.subtitle {
+    margin-top: 12px;
+    font-size: 16px;
+    line-height: 28px;
+    text-align: center;
+}
+
+.features {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 180px;
+    margin: 60px auto 40px;
+    flex-wrap: wrap;
+}
+
+.feature-box {
+    text-align: center;
+}
+
+.feature-box .icon {
+    width: 81px;
+    height: 81px;
+    align-self: center;
+    object-fit: contain;
+    background: #4AF071;
+    padding: 15px;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0,255,0,0.3);
+}
+
+.feature-box h3 {
+    margin-top: 20px;
+    letter-spacing: 2px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.impact-btn {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.services-section {
+    padding: 50px 50px;
+    text-align: center;
+}
+
+.services-title {
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.diamond-divider {
+    width: 100%;
+    height: 20px;
+    margin: 20px auto 50px;
+    background: url('divider.svg') center center no-repeat;
+    background-size: contain;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 45px 70px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.service-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 35px 30px;
+    border-radius: 25px;
+    border: 2px solid #4AF071;
+    box-shadow: 0 0 25px rgba(0, 255, 127, 0.2);
+    text-align: left;
+}
+
+.service-card h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.service-card p {
+    font-size: 14px;
+    color: #cfcfcf;
+}
+
+.collab-flow {
+    padding: 90px 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.flow-title {
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.diamond-divider {
+    width: 100%;
+    height: 20px;
+    margin: 20px auto 60px;
+    background: url('divider.svg') center no-repeat;
+    background-size: contain;
+}
+
+.flow-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.flow-step {
+    width: 100%;
+    margin: 60px 0;
+    position: relative;
+}
+
+.flow-step.left .flow-card {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+.flow-step.right .flow-card {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.step-marker {
+    width: 18px;
+    height: 18px;
+    background: #4AF071;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    box-shadow: 0 0 8px rgba(0, 255, 127, 0.7);
+}
+
+.step-number {
+    position: absolute;
+    font-size: 110px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.05);
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+.flow-card {
+    width: 300px;
+    padding: 25px 25px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #4AF071, #0d0d0d);
+    border: 2px solid #4AF071;
+    box-shadow: 0 0 25px rgba(0, 255, 127, 0.2);
+    text-align: left;
+}
+
+.flow-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.flow-card p {
+    color: #cfcfcf;
+    font-size: 14px;
+    line-height: 1.5;
+}
 
