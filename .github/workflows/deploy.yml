@@ -33,7 +33,7 @@ jobs:
 
       - name: Deploy to S3
         run: |
-          aws s3 sync ./src s3://my-tf-devops-ci-cd-site-unique-name-12345 --delete
+          aws s3 sync . s3://my-tf-devops-ci-cd-site-unique-name-12345 --delete
 
       - name: CloudFront Invalidation
         run: |
