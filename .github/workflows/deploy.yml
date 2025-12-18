@@ -1,5 +1,10 @@
 name: "DevOps Website Deploy"
 
+# 1. Global settings for the whole file
+env:
+  BUCKET_NAME: "my-tf-devops-ci-cd-site-unique-name-12345"
+  AWS_REGION: "eu-north-1"
+
 on:
   push:
     branches:
@@ -15,7 +20,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: "1.14.3"
+          terraform_version: "1.10.0" # Matches your previous troubleshooting
           terraform_wrapper: false
 
       - name: Configure AWS Credentials
@@ -23,7 +28,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-north-1 
+          aws-region: ${{ env.AWS_REGION }} # CHANGED: Uses env variable
 
       - name: Terraform Init
         run: terraform init
@@ -33,15 +38,11 @@ jobs:
 
       - name: Deploy to S3
         run: |
-          aws s3 sync . s3://my-tf-devops-ci-cd-site-unique-name-12345 --delete
-
-      - name: Invalidate CloudFront Cache
-        run: |
-          aws cloudfront create-invalidation \
-            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
-            --paths "/*"
+          # CHANGED: Uses $BUCKET_NAME variable and excludes terraform files
+          aws s3 sync . s3://$BUCKET_NAME --delete --exclude ".git*" --exclude "*.tf*"
 
       - name: CloudFront Invalidation
         run: |
+          # CHANGED: Fetches ID directly from Terraform output automatically
           DIST_ID=$(terraform output -raw cloudfront_distribution_id)
           aws cloudfront create-invalidation --distribution-id $DIST_ID --paths "/*"
