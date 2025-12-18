@@ -35,6 +35,12 @@ jobs:
         run: |
           aws s3 sync . s3://my-tf-devops-ci-cd-site-unique-name-12345 --delete
 
+      - name: Invalidate CloudFront Cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"
+
       - name: CloudFront Invalidation
         run: |
           DIST_ID=$(terraform output -raw cloudfront_distribution_id)
