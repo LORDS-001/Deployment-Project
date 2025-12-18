@@ -43,12 +43,3 @@ resource "aws_s3_bucket_public_access_block" "public_access_block" {
 output "website_endpoint" {
   value = aws_s3_bucket_website_configuration.website_config.website_endpoint
 }
-
-terraform {
-  backend "s3" {
-    bucket         = "your-terraform-state-bucket-name" 
-    key            = "state/terraform.tfstate"
-    region         = "eu-north-1"
-    dynamodb_table = "terraform-lock"                  
-  }
-}
