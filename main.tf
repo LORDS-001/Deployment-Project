@@ -100,3 +100,21 @@ resource "aws_lambda_function" "my_func" {
   handler       = "func.lambda_handler"
   runtime       = "python3.9"
 }
+
+resource "aws_lambda_function_url" "url1" {
+  function_name      = aws_lambda_function.my_func.function_name
+  authorization_type = "NONE"
+
+  cors {
+    allow_credentials = true
+    allow_origins     = ["*"]
+    allow_methods     = ["*"]
+    allow_headers     = ["date", "keep-alive"]
+    expose_headers    = ["keep-alive", "date"]
+    max_age           = 86400
+  }
+}
+
+output "function_url" {
+  value = aws_lambda_function_url.url1.function_url
+}
