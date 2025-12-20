@@ -116,7 +116,7 @@ resource "aws_lambda_function_url" "url1" {
 }
 
 resource "aws_lambda_permission" "allow_public_url" {
-  statement_id  = "FunctionURLAllowPublicAccess"
+  statement_id  = "AllowPublicAccessNew"
   action        = "lambda:InvokeFunctionUrl"
   function_name = aws_lambda_function.my_func.function_name
   principal     = "*"
