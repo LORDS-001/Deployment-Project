@@ -115,6 +115,13 @@ resource "aws_lambda_function_url" "url1" {
   }
 }
 
+resource "aws_lambda_permission" "allow_public_url" {
+  statement_id  = "FunctionURLAllowPublicAccess"
+  action        = "lambda:InvokeFunctionUrl"
+  function_name = aws_lambda_function.my_func.function_name
+  principal     = "*"
+  function_url_auth_type = "NONE"
+}
 resource "aws_iam_policy" "iam_policy_for_resume_project" {
   name        = "aws_iam_policy_for_terraform_resume_project"
   path        = "/"
