@@ -89,7 +89,7 @@ ITEM
 data "archive_file" "zip_the_python_code" {
   type        = "zip"
   source_dir  = "${path.module}/lambda/"
-  output_path = "${path.module}/lambda/func.zip"
+  output_path = "${path.module}/func.zip"
 }
 
 resource "aws_lambda_function" "my_func" {
