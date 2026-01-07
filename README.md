@@ -8,18 +8,17 @@ The goal of this project was to move beyond a simple static website and build a 
 
 Live Project: https://d2wmaqebqzqcc0.cloudfront.net/
 
-## 🏗️ The Tech Stack
+## 🛠️ Tech Stack
 
-Layer            |           Technology
-_________________|_________________________________________________
-Frontend         |    "HTML5, CSS3, JavaScript"
-Hosting          |    Amazon S3 (Static Website Hosting)
-CDN              |    Amazon CloudFront (HTTPS & Global Caching)
-DNS              |    Amazon Route 53
-Backend          |    AWS Lambda (Python 3.9)
-Database         |    Amazon DynamoDB
-IaC              |    Terraform
-CI/CD            |    GitHub Actions
+| Layer          | Technology       | Purpose                                             |
+| :------------- | :--------------- | :-------------------------------------------------- |
+| **Frontend**   | HTML, CSS, JS    | Responsive UI and asynchronous API fetching         |
+| **Hosting**    | Amazon S3        | High-availability static website hosting            |
+| **CDN**        | Amazon CloudFront| Global content delivery and SSL/TLS encryption      |
+| **Backend**    | AWS Lambda       | Serverless Python API for visitor logic             |
+| **Database**   | Amazon DynamoDB  | NoSQL storage for atomic visitor increments         |
+| **IaC**        | Terraform        | Declarative infrastructure management               |
+| **CI/CD**      | GitHub Actions   | Automated testing and deployment pipeline           |
 
 ## 🛠️ Implementation Journey
 
