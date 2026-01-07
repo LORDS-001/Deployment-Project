@@ -356,7 +356,7 @@
         </section>
 
 
-
+    </div>
 
 
 
@@ -365,21 +365,22 @@
     <p>Total Views: <span id="counter">0</span></p>
 
     <script>
-        const counter = document.querySelector(".counter-number");
-        async function updateCounter() {
-            try {
-                let response = await fetch("https://d22fbikinkgt2moeydicukwzmu0upjmj.lambda-url.eu-north-1.on.aws/");
-                let data = await response.json();
-                counter.innerHTML = `Views: ${data.count}`;
-            } catch (error) {
-                console.error("Error fetching counter:", error);
-                counter.innerHTML = "Couldn't read views";
+    async function updateCounter() {
+        try {
+            let response = await fetch("https://d22fbikinkgt2moeydicukwzmu0upjmj.lambda-url.eu-north-1.on.aws/");
+            let data = await response.json();
+            
+            const counterElement = document.getElementById('counter');
+            if (counterElement) {
+                counterElement.innerText = data.count;
             }
+        } catch (error) {
+            console.error("Error:", error);
         }
-        updateCounter();
-    </script>
+    }
+    updateCounter();
+</script>
 
-
-    </div>
+   
 </body>
 </html>
