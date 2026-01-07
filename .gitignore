@@ -9,6 +9,9 @@ Dockerfile
 .terraform/
 .terraform.lock.hcl
 
+*.zip
+lambda/*.zip
+
 crash.log
 override.tf
 override.tf.json
