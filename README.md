@@ -11,7 +11,7 @@ Live Project: https://d2wmaqebqzqcc0.cloudfront.net/
 ## 🏗️ The Tech Stack
 
 Layer            |           Technology
--------------------------------------------------------------------
+_________________|_________________________________________________
 Frontend         |    "HTML5, CSS3, JavaScript"
 Hosting          |    Amazon S3 (Static Website Hosting)
 CDN              |    Amazon CloudFront (HTTPS & Global Caching)
