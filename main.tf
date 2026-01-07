@@ -149,6 +149,10 @@ resource "aws_iam_policy" "iam_policy_for_resume_project" {
   })
 }
 
+resource "aws_iam_role_policy_attachment" "attach_iam_policy_to_iam_role" {
+  role       = aws_iam_role.iam_for_lambda.name
+  policy_arn = aws_iam_policy.iam_policy_for_resume_project.arn
+}
 output "function_url" {
   value = aws_lambda_function_url.url1.function_url
 }
