@@ -141,6 +141,7 @@ resource "aws_iam_policy" "iam_policy_for_resume_project" {
         Action   = [
           "dynamodb:UpdateItem",
           "dynamodb:GetItem"
+          "dynamodb:PutItem"
         ]
         Resource = aws_dynamodb_table.visitor_count.arn
       }
