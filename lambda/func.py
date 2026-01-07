@@ -21,5 +21,5 @@ def lambda_handler(event, context):
             'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/json'
         },
-        'body': json.dumps({'count': int(count)})
+        'body': json.dumps({"count": int(response['Attributes']['count'])})
     }
