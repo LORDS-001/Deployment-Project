@@ -6,7 +6,7 @@ A production-grade serverless web application architected on AWS, featuring full
 
 The goal of this project was to move beyond a simple static website, build a dynamic "visitor counter" using a serverless backend and monitor/observe how well it is working using Grafana. The entire infrastructure is managed as code (IaC) to ensure consistency and automation.
 
-Live Project: https://d2wmaqebqzqcc0.cloudfront.net/
+LIVE PROJECT: https://d2wmaqebqzqcc0.cloudfront.net/
 
 ## Tech Stack
 
@@ -52,7 +52,7 @@ I built a GitHub Actions workflow that triggers on every push:
 3.  Executes terraform apply to update the cloud infrastructure.
 4.  Syncs the frontend files to S3.
 
-## Phase 5: Observability & Proactive Monitoring
+### Phase 5: Observability & Proactive Monitoring
 
 I moved beyond "Basic Cloud Hosting" to "Managed Operations" by implementing a full observability suite. Using Grafana Cloud, I transformed raw AWS data into an actionable operational dashboard.
 
