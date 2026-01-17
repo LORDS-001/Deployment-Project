@@ -64,7 +64,7 @@ I moved beyond "Basic Cloud Hosting" to "Managed Operations" by implementing a f
 - Automated Guardrails: Configured Grafana Alerts to trigger email notifications the moment a "5XX Error" is detected or if the Lambda latency exceeds 2 seconds.
 - Why this matters: This phase proves the infrastructure is "Production-Ready." I don't need to manually check the site to see if it’s healthy; the system tells me when it's hurting.
 
-![Grafana Dashboard](./images/Screenshot 2026-01-07 044714.png)
+![Grafana Dashboard](<images/Screenshot 2026-01-07 044714.png>)
 
 ## 🧠 Technical Challenges & Solutions
 
