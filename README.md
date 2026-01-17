@@ -77,9 +77,11 @@ Solution: Refined the GitHub Action to target only the backend/ directory, reduc
 
 ## 🚀 How to Run Locally
 
-Clone the Repo: git clone https://github.com/[YOUR-USERNAME]/[YOUR-REPO]
-Initialize Infrastructure: ```bash cd terraform terraform init terraform apply
-Deploy Frontend: Sync your website/ folder to the S3 bucket created by Terraform.
+- Clone the Repo: git clone https://github.com/[YOUR-USERNAME]/[YOUR-REPO]
+
+- Initialize Infrastructure: ```bash cd terraform terraform init terraform apply
+
+- Deploy Frontend: Sync your website/ folder to the S3 bucket created by Terraform.
 
 ## Author
 
