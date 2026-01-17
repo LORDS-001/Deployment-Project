@@ -2,13 +2,13 @@
 
 A production-grade serverless web application architected on AWS, featuring fully automated CI/CD and real-time observability. This project demonstrates the transition from manual cloud provisioning to a Self-Reporting Infrastructure model.
 
-## 🌐 Project Overview
+## Project Overview
 
 The goal of this project was to move beyond a simple static website, build a dynamic "visitor counter" using a serverless backend and monitor/observe how well it is working using Grafana. The entire infrastructure is managed as code (IaC) to ensure consistency and automation.
 
 Live Project: https://d2wmaqebqzqcc0.cloudfront.net/
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer             | Technology           | Purpose                                             |
 | :---------------- | :------------------- | :-------------------------------------------------- |
@@ -21,7 +21,7 @@ Live Project: https://d2wmaqebqzqcc0.cloudfront.net/
 | **CI/CD**         | GitHub Actions       | Automated testing and deployment pipeline           |
 | **Monitoring**    | Grafana Cloud        | Observability and Monitoring                        |
 
-## 🛠️ Implementation Journey
+## Implementation Journey
 
 ### Phase 1: Frontend & CDN
 
@@ -66,7 +66,7 @@ I moved beyond "Basic Cloud Hosting" to "Managed Operations" by implementing a f
 
 ![Grafana Dashboard](<images/Screenshot 2026-01-07 044714.png>)
 
-## 🧠 Technical Challenges & Solutions
+## Technical Challenges & Solutions
 
 - The CORS Conflict: Initially faced Multiple values '*, *' errors. I learned that having CORS enabled on both the Lambda Function URL and inside the Python code creates a header conflict.    Solution: Centralized all CORS logic within the Python application for cleaner control.
 
@@ -75,7 +75,7 @@ I moved beyond "Basic Cloud Hosting" to "Managed Operations" by implementing a f
 - Recursive Zipping: My CI/CD was accidentally zipping the entire repository into the Lambda package. 
 Solution: Refined the GitHub Action to target only the backend/ directory, reducing deployment size by 90%.
 
-## 🚀 How to Run Locally
+## How to Run Locally
 
 - Clone the Repo: git clone https://github.com/[YOUR-USERNAME]/[YOUR-REPO]
 
